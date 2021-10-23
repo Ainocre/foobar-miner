@@ -8,7 +8,7 @@ import WinnerScreen from './components/WinnerScreen'
 import RobotDashboard from './components/RobotDashboard'
 
 // Give direct resources to help debug
-const TEST_MODE = true
+const TEST_MODE = false
 
 function App() {
   const [userWon, setUserWon] = useState(false)
