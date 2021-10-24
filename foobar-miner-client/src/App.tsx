@@ -20,7 +20,8 @@ function App() {
   })
 
   // Detect end of game
-  if (!userWon && robotNb === 20) {
+  // If user have crafted 20 robots and not won yet to avoid infinit loop
+  if (robotNb === 20 && !userWon) {
     setUserWon(true)
     // kill the robots to stop setIntervals
     setRobotsNb(0)

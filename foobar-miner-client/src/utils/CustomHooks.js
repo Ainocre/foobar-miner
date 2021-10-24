@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { rules, frameDuration} from './config'
+import { rules, frameDuration } from './config'
 
 const moveLoops = rules.move.iterations()
 
@@ -41,13 +41,12 @@ export function useRobot ({ onCollect }) {
           progress: Math.round((loopData.totalIterations - loopData.iterations) / loopData.totalIterations * 100),
         })
 
-      } else {
-        // Here is when the wainting time end's up
-
+      } else { // Here is when the wainting time end's up
         // Collect current status rewards
-        const currentStatusRules = rules[loopData.status]
-        if (currentStatusRules.collect) {
-          onCollect(currentStatusRules.collect())
+        const { collect } = rules[loopData.status]
+
+        if (collect) {
+          onCollect(collect())
         }
 
         const totalIterations = rules[loopData.nextLoopStatus].iterations()
