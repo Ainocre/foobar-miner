@@ -1,14 +1,10 @@
 import { Row, Col } from 'react-flexbox-grid'
+import { Stock } from '../utils/sharedTypes'
 import Robot from './Robot'
 
 type RobotDashboardProps = {
   robotNb: number,
-  onRobotCollect(newStock: {
-    foo?: number,
-    bar?: number,
-    foobar?: number,
-    test: string,
-  }): void
+  onRobotCollect(newStock: Stock): void
 }
 
 const RobotDashboard = ({ robotNb, onRobotCollect }: RobotDashboardProps) => (

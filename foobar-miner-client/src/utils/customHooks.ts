@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { rules, frameDuration } from './config'
-import type { Status } from '../utils/sharedTypes'
+import type { Status, Stock } from '../utils/sharedTypes'
 
 const moveLoops = rules.move.iterations()
 
@@ -26,11 +26,7 @@ export function useInterval(callback: () => void, delay: number) {
 }
 
 type UseRobot = {
-  onCollect (newStock: {
-    foo?: number,
-    bar?: number,
-    foobar?: number,
-  }): void
+  onCollect (newStock: Stock): void
 }
 
 type LoopData = {

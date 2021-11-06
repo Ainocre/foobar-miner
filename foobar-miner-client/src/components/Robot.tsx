@@ -1,7 +1,4 @@
-import PropTypes from 'prop-types';
-import { useRobot } from '../utils/customHooks';
-import { rules } from '../utils/config'
-
+import PropTypes from 'prop-types'
 import {
   Card,
   CardContent,
@@ -13,14 +10,14 @@ import {
   ToggleButton,
 } from 'ui-neumorphism'
 
+import { useRobot } from '../utils/customHooks'
+import { rules } from '../utils/config'
+import type { Stock } from '../utils/sharedTypes'
+
+
 type robotProps = {
   robotIndex: number,
-  onCollect (newStock: {
-    foo?: number,
-    bar?: number,
-    foobar?: number,
-    test: string,
-  }): void
+  onCollect (newStock: Stock): void
 }
 
 function Robot ({ robotIndex, onCollect }: robotProps) {

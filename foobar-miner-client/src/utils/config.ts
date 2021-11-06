@@ -1,4 +1,4 @@
-import type { Status } from '../utils/sharedTypes'
+import type { Status, Stock } from '../utils/sharedTypes'
 
 export const FPS = 10
 export const frameDuration = 1000 / FPS
@@ -6,7 +6,7 @@ export const frameDuration = 1000 / FPS
 type Rule = {
   label: string,
   iterations: () => number,
-  collect?: () => {},
+  collect?: () => Stock,
 }
 
 type Rules = {
