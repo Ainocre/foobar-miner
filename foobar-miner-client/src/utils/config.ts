@@ -1,7 +1,19 @@
+import type { Status } from '../utils/sharedTypes'
+
 export const FPS = 10
 export const frameDuration = 1000 / FPS
 
-export const rules = {
+type Rule = {
+  label: string,
+  iterations: () => number,
+  collect?: () => {},
+}
+
+type Rules = {
+  [key in Status]: Rule
+}
+
+export const rules: Rules = {
   move: {
     label: 'En déplacement (5s)',
     iterations: () => 5000 / frameDuration,
@@ -16,7 +28,7 @@ export const rules = {
     iterations: () => {
       const duration = Math.floor(Math.random() * 1500) + 500
 
-      return parseInt(duration / frameDuration)
+      return Number(duration / frameDuration)
     },
     collect: () => ({ bar: 1 }),
   },

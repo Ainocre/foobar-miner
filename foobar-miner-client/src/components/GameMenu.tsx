@@ -1,7 +1,15 @@
 import { Row, Col } from 'react-flexbox-grid'
 import { Button } from 'ui-neumorphism'
 
-const GameMenu = ({ foo, bar, foobar, robotNb, onBuyRobot }) => (
+type GameMenuProps = {
+  foo: number,
+  bar: number,
+  foobar: number,
+  robotNb: number,
+  onBuyRobot (): void,
+}
+
+const GameMenu = ({ foo, bar, foobar, robotNb, onBuyRobot }: GameMenuProps) => (
   <Row style={{ position: 'fixed', width: '100%', backgroundColor: 'var(--light-bg)' }} end="md" middle="md">
     <Col style={{ padding: 20 }}>
       <strong>Robots : </strong> {robotNb}

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRobot } from "../utils/CustomHooks";
+import { useRobot } from '../utils/customHooks';
 import { rules } from '../utils/config'
 
 import {
@@ -13,14 +13,24 @@ import {
   ToggleButton,
 } from 'ui-neumorphism'
 
-function Robot ({ robotIndex, onCollect }) {
+type robotProps = {
+  robotIndex: number,
+  onCollect (newStock: {
+    foo?: number,
+    bar?: number,
+    foobar?: number,
+    test: string,
+  }): void
+}
+
+function Robot ({ robotIndex, onCollect }: robotProps) {
   // All robot logic and render loop is in this custom hook "useRobot"
   const {
     loopData,
     action,
   } = useRobot({ onCollect })
 
-  function handleChangeStatus ({ value: newStatus }) {
+  function handleChangeStatus ({ value: newStatus }: { value: 'move' | 'mineFoo' | 'mineBar' | 'craftFooBar' }) {
     if (!loopData || loopData.status !== newStatus) {
       action(newStatus)
     }

@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from 'react'
 import { rules, frameDuration } from './config'
+import type { Status } from '../utils/sharedTypes'
 
 const moveLoops = rules.move.iterations()
 
 // This custom hook implement js setInterval with react preserving state between renderings
-export function useInterval(callback, delay) {
-  const savedCallback = useRef()
+export function useInterval(callback: () => void, delay: number) {
+  const savedCallback = useRef<() => void>()
 
   useEffect(() => {
     savedCallback.current = callback
@@ -13,7 +14,9 @@ export function useInterval(callback, delay) {
 
   useEffect(() => {
     function tick() {
-      savedCallback.current()
+      if (savedCallback.current) {
+        savedCallback.current()
+      }
     }
     if (delay !== null) {
       let id = setInterval(tick, delay)
@@ -22,10 +25,26 @@ export function useInterval(callback, delay) {
   }, [delay])
 }
 
+type UseRobot = {
+  onCollect (newStock: {
+    foo?: number,
+    bar?: number,
+    foobar?: number,
+  }): void
+}
+
+type LoopData = {
+  status: Status,
+  iterations: number,
+  totalIterations: number,
+  nextLoopStatus: Status,
+  progress: number,
+}
+
 // This is the robot logic, game loop and observers
-export function useRobot ({ onCollect }) {
+export function useRobot ({ onCollect }: UseRobot) {
   // This is the state of the robot game loop
-  const [loopData, setLoopData] = useState(null)
+  const [loopData, setLoopData] = useState<LoopData>()
 
   // Launch the game loop with the framerate in config
   useInterval(() => {
@@ -65,7 +84,7 @@ export function useRobot ({ onCollect }) {
 
   // This function handle changing robot job
   // It cut the current loop by replacing with the new one
-  async function action (newStatus) {
+  function action (newStatus: Status) {
     setLoopData({
       status: 'move', // It will first set moving status
       iterations: moveLoops,
