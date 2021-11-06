@@ -36,13 +36,13 @@ function Robot ({ robotIndex, onCollect }: robotProps) {
   const robotStatusLabel = loopData ? rules[loopData.status].label : 'Oisif'
 
   return (
-    <div style={{ padding: 8 }}>
+    <div className="robot" style={{ padding: 8 }}>
       <Card style={{ padding: 8 }}>
         <CardContent>
-          <H5>
+          <H5 className="robot__name">
             Robot {robotIndex + 1}
           </H5>
-          <Subtitle2 secondary style={{ margin: '6px 0' }} >
+          <Subtitle2 className="robot__status" secondary style={{ margin: '6px 0' }} >
             {robotStatusLabel}
           </Subtitle2>
           <ProgressLinear
